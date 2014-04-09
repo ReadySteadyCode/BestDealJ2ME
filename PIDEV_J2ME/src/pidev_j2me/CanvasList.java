@@ -49,7 +49,7 @@ public class CanvasList extends Canvas
 	
 	// these will hold List vertical scrolling
 	int scrollTop = 0;
-	final int SCROLL_STEP = 40;
+	final int SCROLL_STEP = 80;
 	
 	public CanvasList(String title, String[] items, Image[] imageElements)
 	{
@@ -65,8 +65,9 @@ public class CanvasList extends Canvas
 		for(int i = 0; i < itemLines.length; i++)
 		{
 			// get image part of this item, if available
-			Image imagePart = getImage(i);
-			
+                    
+			Image imagePart1 = getImage(i);
+			Image imagePart = createThumbnail(imagePart1);
 			// get avaiable width for text
 			int w = getItemWidth() - (imagePart != null ? imagePart.getWidth() + padding : 0);
 			
@@ -147,7 +148,9 @@ public class CanvasList extends Canvas
 		{
 			int itemRows = itemLines[i].length;
 			
-			Image imagePart = getImage(i);
+			Image imagePart1 = getImage(i);
+			Image imagePart = createThumbnail(imagePart1);
+                        
 			
 			int itemHeight = itemRows * font.getHeight() + linePadding * (itemRows - 1);
 			
@@ -266,4 +269,33 @@ public class CanvasList extends Canvas
 	
 		return rowsArray;
 	}
+        
+        private Image createThumbnail(Image image)  
+{  
+   int sourceWidth = image.getWidth();  
+   int sourceHeight = image.getHeight();  
+   int thumbWidth = 64;  
+   int thumbHeight = -1;  
+   
+   if (thumbHeight == -1)  
+      thumbHeight = thumbWidth * sourceHeight / sourceWidth;  
+   
+   Image thumb = Image.createImage(thumbWidth, thumbHeight);  
+   Graphics g = thumb.getGraphics();  
+   
+   for (int y = 0; y < thumbHeight; y++)  
+   {  
+      for (int x = 0; x < thumbWidth; x++)  
+      {  
+        g.setClip(x, y, 1, 1);  
+        int dx = x * sourceWidth / thumbWidth;  
+        int dy = y * sourceHeight / thumbHeight;  
+        g.drawImage(image, x - dx, y - dy, Graphics.LEFT | Graphics.TOP);  
+      }  
+   }  
+   
+   Image immutableThumb = Image.createImage(thumb);  
+   
+   return immutableThumb;  
+}  
 }

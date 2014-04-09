@@ -19,6 +19,7 @@
                 <Component componentID="5" typeID="C#Display"/>
                 <Component componentID="38" typeID="C#IfPoint">
                     <Property name="methodName" typeID="Pjava.lang.String" value="VLoginMethod"/>
+                    <Property name="condition" typeID="P#javacode" value="Vnom==true"/>
                     <Property name="true" typeID="C#IfTrueEventSource" value="R39"/>
                     <Property name="false" typeID="C#IfFalseEventSource" value="R40"/>
                     <Component componentID="39" typeID="C#IfTrueEventSource">
@@ -171,6 +172,9 @@
                     <Property name="title" typeID="Pjava.lang.String" value="VcanvasList"/>
                     <Property name="commandListener" typeID="C#CommandListener" value="R7"/>
                     <Property name="isFullScreen" typeID="Pboolean" value="Vtrue"/>
+                    <Property name="pidev_j2me.CanvasList#1#1" typeID="Pjava.lang.String" value="VMa Liste de Deals"/>
+                    <Property name="pidev_j2me.CanvasList#1#2" typeID="P#javacode" value="Vitems"/>
+                    <Property name="pidev_j2me.CanvasList#1#3" typeID="P#javacode" value="VimageElements"/>
                 </Component>
             </Component>
             <Component componentID="11" typeID="C#CommandsCategory">

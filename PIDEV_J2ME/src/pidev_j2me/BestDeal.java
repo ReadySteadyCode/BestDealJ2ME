@@ -6,6 +6,7 @@
 
 package pidev_j2me;
 
+import java.io.IOException;
 import javax.microedition.midlet.*;
 import javax.microedition.lcdui.*;
 import javax.microedition.media.Manager;
@@ -36,10 +37,17 @@ public class BestDeal extends MIDlet implements CommandListener {
     private Command backCommand1;
     private Image image1;
 //</editor-fold>//GEN-END:|fields|0|
+    String[] items={"hello","ww","ww","ww"};
+    Image[] imageElements;
     /**
      * The BestDeal constructor.
      */
     public BestDeal() {
+        try {
+            this.imageElements = new Image[]{Image.createImage("/a.png"),Image.createImage("/a.png"),getImage1(),getImage1()};
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
@@ -384,8 +392,8 @@ okCommand1 = new Command("se connecter", Command.OK, 0);//GEN-LINE:|34-getter|1|
      */
     public void LoginMethod() {
 //GEN-END:|38-if|0|38-preIf
- // enter pre-if user code here
-if (true) {//GEN-LINE:|38-if|1|39-preAction
+ boolean nom = true;
+        if (nom == true) {//GEN-LINE:|38-if|1|39-preAction
  // write pre-action user code here
 switchDisplayable(null, getCanvasList());//GEN-LINE:|38-if|2|39-postAction
  // write post-action user code here
@@ -442,13 +450,14 @@ backCommand1 = new Command("Back", Command.BACK, 0);//GEN-LINE:|44-getter|1|44-p
      * @return the initialized component instance
      */
     public CanvasList getCanvasList() {
-        if (canvasList == null) {//GEN-END:|47-getter|0|47-preInit
+        if (canvasList == null) {
+//GEN-END:|47-getter|0|47-preInit
  // write pre-init user code here
-canvasList = new CanvasList(null, null, null);//GEN-BEGIN:|47-getter|1|47-postInit
+canvasList = new CanvasList("Ma Liste de Deals", items, imageElements);//GEN-BEGIN:|47-getter|1|47-postInit
             canvasList.setTitle("canvasList");
             canvasList.setFullScreenMode(true);//GEN-END:|47-getter|1|47-postInit
   
-}//GEN-BEGIN:|47-getter|2|
+        }//GEN-BEGIN:|47-getter|2|
         return canvasList;
     }
 //</editor-fold>//GEN-END:|47-getter|2|
@@ -483,6 +492,7 @@ canvasList = new CanvasList(null, null, null);//GEN-BEGIN:|47-getter|1|47-postIn
             startMIDlet();
         }
         midletPaused = false;
+        
     }
 
     /**
