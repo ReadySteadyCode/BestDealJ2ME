@@ -30,11 +30,25 @@ public class BestDeal extends MIDlet implements CommandListener {
     private TextField textField1;
     private Alert alert;
     private CanvasList canvasList;
+    private Form DetailDeal;
+    private Form DetailVendeur;
+    private Form CreateAccountForm;
+    private Alert alertCreate;
     private Command exitCommand;
     private Command okCommand;
     private Command backCommand;
     private Command okCommand1;
     private Command backCommand1;
+    private Command okCommand2;
+    private Command backCommand2;
+    private Command exitCommand1;
+    private Command okCommand3;
+    private Command okCommand4;
+    private Command okCommand5;
+    private Command backCommand3;
+    private Command okCommand6;
+    private Command backCommand4;
+    private Command backCommand5;
     private Image image1;
 //</editor-fold>//GEN-END:|fields|0|
     String[] items={"hello","ww","ww","ww"};
@@ -44,7 +58,7 @@ public class BestDeal extends MIDlet implements CommandListener {
      */
     public BestDeal() {
         try {
-            this.imageElements = new Image[]{Image.createImage("/a.png"),Image.createImage("/a.png"),getImage1(),getImage1()};
+            this.imageElements = new Image[]{Image.createImage("/dotnet.png"),Image.createImage("/a.png"),getImage1(),getImage1()};
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -124,42 +138,88 @@ Display display = getDisplay();//GEN-BEGIN:|5-switchDisplayable|1|5-postSwitch
     public void commandAction(Command command, Displayable displayable) {
 //GEN-END:|7-commandAction|0|7-preCommandAction
  // write pre-action user code here
-if (displayable == InternauteDeals) {//GEN-BEGIN:|7-commandAction|1|22-preAction
-            if (command == exitCommand) {//GEN-END:|7-commandAction|1|22-preAction
+if (displayable == CreateAccountForm) {//GEN-BEGIN:|7-commandAction|1|74-preAction
+            if (command == backCommand3) {//GEN-END:|7-commandAction|1|74-preAction
  // write pre-action user code here
-exitMIDlet();//GEN-LINE:|7-commandAction|2|22-postAction
+switchDisplayable(null, getLoginForm());//GEN-LINE:|7-commandAction|2|74-postAction
  // write post-action user code here
-} else if (command == okCommand) {//GEN-LINE:|7-commandAction|3|24-preAction
+} else if (command == okCommand6) {//GEN-LINE:|7-commandAction|3|77-preAction
  // write pre-action user code here
-switchDisplayable(null, getLoginForm());//GEN-LINE:|7-commandAction|4|24-postAction
+Createmethod();//GEN-LINE:|7-commandAction|4|77-postAction
  // write post-action user code here
-}//GEN-BEGIN:|7-commandAction|5|32-preAction
+}//GEN-BEGIN:|7-commandAction|5|61-preAction
+} else if (displayable == DetailDeal) {
+    if (command == okCommand3) {//GEN-END:|7-commandAction|5|61-preAction
+ // write pre-action user code here
+switchDisplayable(null, getDetailVendeur());//GEN-LINE:|7-commandAction|6|61-postAction
+ // write post-action user code here
+}//GEN-BEGIN:|7-commandAction|7|91-preAction
+} else if (displayable == DetailVendeur) {
+    if (command == backCommand5) {//GEN-END:|7-commandAction|7|91-preAction
+ // write pre-action user code here
+switchDisplayable(null, getDetailDeal());//GEN-LINE:|7-commandAction|8|91-postAction
+ // write post-action user code here
+} else if (command == okCommand4) {//GEN-LINE:|7-commandAction|9|65-preAction
+ // write pre-action user code here
+//GEN-LINE:|7-commandAction|10|65-postAction
+ // write post-action user code here
+}//GEN-BEGIN:|7-commandAction|11|22-preAction
+} else if (displayable == InternauteDeals) {
+    if (command == exitCommand) {//GEN-END:|7-commandAction|11|22-preAction
+ // write pre-action user code here
+exitMIDlet();//GEN-LINE:|7-commandAction|12|22-postAction
+ // write post-action user code here
+} else if (command == okCommand) {//GEN-LINE:|7-commandAction|13|24-preAction
+ // write pre-action user code here
+switchDisplayable(null, getLoginForm());//GEN-LINE:|7-commandAction|14|24-postAction
+ // write post-action user code here
+}//GEN-BEGIN:|7-commandAction|15|32-preAction
 } else if (displayable == LoginForm) {
-    if (command == backCommand) {//GEN-END:|7-commandAction|5|32-preAction
+    if (command == backCommand) {//GEN-END:|7-commandAction|15|32-preAction
  // write pre-action user code here
-switchDisplayable(null, getInternauteDeals());//GEN-LINE:|7-commandAction|6|32-postAction
+switchDisplayable(null, getInternauteDeals());//GEN-LINE:|7-commandAction|16|32-postAction
  // write post-action user code here
-} else if (command == okCommand1) {//GEN-LINE:|7-commandAction|7|35-preAction
+} else if (command == okCommand1) {//GEN-LINE:|7-commandAction|17|35-preAction
  // write pre-action user code here
-LoginMethod();//GEN-LINE:|7-commandAction|8|35-postAction
+LoginMethod();//GEN-LINE:|7-commandAction|18|35-postAction
  // write post-action user code here
-}//GEN-BEGIN:|7-commandAction|9|45-preAction
+} else if (command == okCommand5) {//GEN-LINE:|7-commandAction|19|68-preAction
+ // write pre-action user code here
+switchDisplayable(null, getCreateAccountForm());//GEN-LINE:|7-commandAction|20|68-postAction
+ // write post-action user code here
+}//GEN-BEGIN:|7-commandAction|21|45-preAction
 } else if (displayable == alert) {
-    if (command == backCommand1) {//GEN-END:|7-commandAction|9|45-preAction
+    if (command == backCommand1) {//GEN-END:|7-commandAction|21|45-preAction
  // write pre-action user code here
-switchDisplayable(null, getLoginForm());//GEN-LINE:|7-commandAction|10|45-postAction
+switchDisplayable(null, getLoginForm());//GEN-LINE:|7-commandAction|22|45-postAction
  // write post-action user code here
-}//GEN-BEGIN:|7-commandAction|11|16-preAction
+}//GEN-BEGIN:|7-commandAction|23|87-preAction
+} else if (displayable == alertCreate) {
+    if (command == backCommand4) {//GEN-END:|7-commandAction|23|87-preAction
+ // write pre-action user code here
+switchDisplayable(null, getCreateAccountForm());//GEN-LINE:|7-commandAction|24|87-postAction
+ // write post-action user code here
+}//GEN-BEGIN:|7-commandAction|25|56-preAction
+} else if (displayable == canvasList) {
+    if (command == exitCommand1) {//GEN-END:|7-commandAction|25|56-preAction
+ // write pre-action user code here
+exitMIDlet();//GEN-LINE:|7-commandAction|26|56-postAction
+ // write post-action user code here
+} else if (command == okCommand2) {//GEN-LINE:|7-commandAction|27|50-preAction
+ // write pre-action user code here
+switchDisplayable(null, getDetailDeal());//GEN-LINE:|7-commandAction|28|50-postAction
+ // write post-action user code here
+}//GEN-BEGIN:|7-commandAction|29|16-preAction
 } else if (displayable == splashScreen) {
-    if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|11|16-preAction
+    if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|29|16-preAction
  // write pre-action user code here
-switchDisplayable(null, getInternauteDeals());//GEN-LINE:|7-commandAction|12|16-postAction
+switchDisplayable(null, getInternauteDeals());//GEN-LINE:|7-commandAction|30|16-postAction
  // write post-action user code here
-}//GEN-BEGIN:|7-commandAction|13|7-postCommandAction
-        }//GEN-END:|7-commandAction|13|7-postCommandAction
+}//GEN-BEGIN:|7-commandAction|31|7-postCommandAction
+        }//GEN-END:|7-commandAction|31|7-postCommandAction
  // write post-action user code here
-}//GEN-BEGIN:|7-commandAction|14|
-//</editor-fold>//GEN-END:|7-commandAction|14|
+}//GEN-BEGIN:|7-commandAction|32|
+//</editor-fold>//GEN-END:|7-commandAction|32|
 
 //<editor-fold defaultstate="collapsed" desc=" Generated Getter: splashScreen ">//GEN-BEGIN:|14-getter|0|14-preInit
     /**
@@ -240,6 +300,7 @@ InternauteDeals = new Form("Liste des Deals");//GEN-BEGIN:|19-getter|1|19-postIn
 LoginForm = new Form("form", new Item[]{getSpacer(), getTextField(), getSpacer1(), getTextField1()});//GEN-BEGIN:|26-getter|1|26-postInit
             LoginForm.addCommand(getBackCommand());
             LoginForm.addCommand(getOkCommand1());
+            LoginForm.addCommand(getOkCommand5());
             LoginForm.setCommandListener(this);//GEN-END:|26-getter|1|26-postInit
  // write post-init user code here
 }//GEN-BEGIN:|26-getter|2|
@@ -455,12 +516,285 @@ backCommand1 = new Command("Back", Command.BACK, 0);//GEN-LINE:|44-getter|1|44-p
  // write pre-init user code here
 canvasList = new CanvasList("Ma Liste de Deals", items, imageElements);//GEN-BEGIN:|47-getter|1|47-postInit
             canvasList.setTitle("canvasList");
-            canvasList.setFullScreenMode(true);//GEN-END:|47-getter|1|47-postInit
+            canvasList.addCommand(getOkCommand2());
+            canvasList.addCommand(getExitCommand1());
+            canvasList.setCommandListener(this);//GEN-END:|47-getter|1|47-postInit
   
         }//GEN-BEGIN:|47-getter|2|
         return canvasList;
     }
 //</editor-fold>//GEN-END:|47-getter|2|
+
+
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: okCommand2 ">//GEN-BEGIN:|49-getter|0|49-preInit
+    /**
+     * Returns an initialized instance of okCommand2 component.
+     *
+     * @return the initialized component instance
+     */
+    public Command getOkCommand2() {
+        if (okCommand2 == null) {
+//GEN-END:|49-getter|0|49-preInit
+ // write pre-init user code here
+okCommand2 = new Command("Afficher les D\u00E9tails", Command.OK, 0);//GEN-LINE:|49-getter|1|49-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|49-getter|2|
+        return okCommand2;
+    }
+//</editor-fold>//GEN-END:|49-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: DetailDeal ">//GEN-BEGIN:|58-getter|0|58-preInit
+    /**
+     * Returns an initialized instance of DetailDeal component.
+     *
+     * @return the initialized component instance
+     */
+    public Form getDetailDeal() {
+        if (DetailDeal == null) {
+//GEN-END:|58-getter|0|58-preInit
+ // write pre-init user code here
+DetailDeal = new Form("Cr\u00E9er un Compte");//GEN-BEGIN:|58-getter|1|58-postInit
+            DetailDeal.addCommand(getOkCommand3());
+            DetailDeal.setCommandListener(this);//GEN-END:|58-getter|1|58-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|58-getter|2|
+        return DetailDeal;
+    }
+//</editor-fold>//GEN-END:|58-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: DetailVendeur ">//GEN-BEGIN:|62-getter|0|62-preInit
+    /**
+     * Returns an initialized instance of DetailVendeur component.
+     *
+     * @return the initialized component instance
+     */
+    public Form getDetailVendeur() {
+        if (DetailVendeur == null) {
+//GEN-END:|62-getter|0|62-preInit
+ // write pre-init user code here
+DetailVendeur = new Form("form");//GEN-BEGIN:|62-getter|1|62-postInit
+            DetailVendeur.addCommand(getOkCommand4());
+            DetailVendeur.addCommand(getBackCommand5());
+            DetailVendeur.setCommandListener(this);//GEN-END:|62-getter|1|62-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|62-getter|2|
+        return DetailVendeur;
+    }
+//</editor-fold>//GEN-END:|62-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: backCommand2 ">//GEN-BEGIN:|53-getter|0|53-preInit
+    /**
+     * Returns an initialized instance of backCommand2 component.
+     *
+     * @return the initialized component instance
+     */
+    public Command getBackCommand2() {
+        if (backCommand2 == null) {
+//GEN-END:|53-getter|0|53-preInit
+ // write pre-init user code here
+backCommand2 = new Command("Back", Command.BACK, 0);//GEN-LINE:|53-getter|1|53-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|53-getter|2|
+        return backCommand2;
+    }
+//</editor-fold>//GEN-END:|53-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand1 ">//GEN-BEGIN:|55-getter|0|55-preInit
+    /**
+     * Returns an initialized instance of exitCommand1 component.
+     *
+     * @return the initialized component instance
+     */
+    public Command getExitCommand1() {
+        if (exitCommand1 == null) {
+//GEN-END:|55-getter|0|55-preInit
+ // write pre-init user code here
+exitCommand1 = new Command("Quitter", Command.EXIT, 0);//GEN-LINE:|55-getter|1|55-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|55-getter|2|
+        return exitCommand1;
+    }
+//</editor-fold>//GEN-END:|55-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: okCommand3 ">//GEN-BEGIN:|60-getter|0|60-preInit
+    /**
+     * Returns an initialized instance of okCommand3 component.
+     *
+     * @return the initialized component instance
+     */
+    public Command getOkCommand3() {
+        if (okCommand3 == null) {
+//GEN-END:|60-getter|0|60-preInit
+ // write pre-init user code here
+okCommand3 = new Command("D\u00E9tails sur le vendeur", Command.OK, 0);//GEN-LINE:|60-getter|1|60-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|60-getter|2|
+        return okCommand3;
+    }
+//</editor-fold>//GEN-END:|60-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: okCommand4 ">//GEN-BEGIN:|64-getter|0|64-preInit
+    /**
+     * Returns an initialized instance of okCommand4 component.
+     *
+     * @return the initialized component instance
+     */
+    public Command getOkCommand4() {
+        if (okCommand4 == null) {
+//GEN-END:|64-getter|0|64-preInit
+ // write pre-init user code here
+okCommand4 = new Command("Afficher sur la carte", Command.OK, 0);//GEN-LINE:|64-getter|1|64-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|64-getter|2|
+        return okCommand4;
+    }
+//</editor-fold>//GEN-END:|64-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Method: Createmethod ">//GEN-BEGIN:|78-if|0|78-preIf
+    /**
+     * Performs an action assigned to the Createmethod if-point.
+     */
+    public void Createmethod() {
+//GEN-END:|78-if|0|78-preIf
+ // enter pre-if user code here
+if (true) {//GEN-LINE:|78-if|1|79-preAction
+ // write pre-action user code here
+switchDisplayable(null, getLoginForm());//GEN-LINE:|78-if|2|79-postAction
+ // write post-action user code here
+} else {//GEN-LINE:|78-if|3|80-preAction
+ // write pre-action user code here
+switchDisplayable(null, getAlertCreate());//GEN-LINE:|78-if|4|80-postAction
+ // write post-action user code here
+}//GEN-LINE:|78-if|5|78-postIf
+ // enter post-if user code here
+}//GEN-BEGIN:|78-if|6|
+//</editor-fold>//GEN-END:|78-if|6|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: CreateAccountForm ">//GEN-BEGIN:|71-getter|0|71-preInit
+    /**
+     * Returns an initialized instance of CreateAccountForm component.
+     *
+     * @return the initialized component instance
+     */
+    public Form getCreateAccountForm() {
+        if (CreateAccountForm == null) {
+//GEN-END:|71-getter|0|71-preInit
+ // write pre-init user code here
+CreateAccountForm = new Form("form1");//GEN-BEGIN:|71-getter|1|71-postInit
+            CreateAccountForm.addCommand(getBackCommand3());
+            CreateAccountForm.addCommand(getOkCommand6());
+            CreateAccountForm.setCommandListener(this);//GEN-END:|71-getter|1|71-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|71-getter|2|
+        return CreateAccountForm;
+    }
+//</editor-fold>//GEN-END:|71-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: alertCreate ">//GEN-BEGIN:|83-getter|0|83-preInit
+    /**
+     * Returns an initialized instance of alertCreate component.
+     *
+     * @return the initialized component instance
+     */
+    public Alert getAlertCreate() {
+        if (alertCreate == null) {
+//GEN-END:|83-getter|0|83-preInit
+ // write pre-init user code here
+alertCreate = new Alert("Probl\u00E8me de connexion", "impossible de cr\u00E9er un compte", null, null);//GEN-BEGIN:|83-getter|1|83-postInit
+            alertCreate.addCommand(getBackCommand4());
+            alertCreate.setCommandListener(this);
+            alertCreate.setTimeout(Alert.FOREVER);//GEN-END:|83-getter|1|83-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|83-getter|2|
+        return alertCreate;
+    }
+//</editor-fold>//GEN-END:|83-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: okCommand5 ">//GEN-BEGIN:|67-getter|0|67-preInit
+    /**
+     * Returns an initialized instance of okCommand5 component.
+     *
+     * @return the initialized component instance
+     */
+    public Command getOkCommand5() {
+        if (okCommand5 == null) {
+//GEN-END:|67-getter|0|67-preInit
+ // write pre-init user code here
+okCommand5 = new Command("Cr\u00E9er un compte", Command.OK, 0);//GEN-LINE:|67-getter|1|67-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|67-getter|2|
+        return okCommand5;
+    }
+//</editor-fold>//GEN-END:|67-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: backCommand3 ">//GEN-BEGIN:|73-getter|0|73-preInit
+    /**
+     * Returns an initialized instance of backCommand3 component.
+     *
+     * @return the initialized component instance
+     */
+    public Command getBackCommand3() {
+        if (backCommand3 == null) {
+//GEN-END:|73-getter|0|73-preInit
+ // write pre-init user code here
+backCommand3 = new Command("Back", Command.BACK, 0);//GEN-LINE:|73-getter|1|73-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|73-getter|2|
+        return backCommand3;
+    }
+//</editor-fold>//GEN-END:|73-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: okCommand6 ">//GEN-BEGIN:|76-getter|0|76-preInit
+    /**
+     * Returns an initialized instance of okCommand6 component.
+     *
+     * @return the initialized component instance
+     */
+    public Command getOkCommand6() {
+        if (okCommand6 == null) {
+//GEN-END:|76-getter|0|76-preInit
+ // write pre-init user code here
+okCommand6 = new Command("Cr\u00E9er", Command.OK, 0);//GEN-LINE:|76-getter|1|76-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|76-getter|2|
+        return okCommand6;
+    }
+//</editor-fold>//GEN-END:|76-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: backCommand4 ">//GEN-BEGIN:|86-getter|0|86-preInit
+    /**
+     * Returns an initialized instance of backCommand4 component.
+     *
+     * @return the initialized component instance
+     */
+    public Command getBackCommand4() {
+        if (backCommand4 == null) {
+//GEN-END:|86-getter|0|86-preInit
+ // write pre-init user code here
+backCommand4 = new Command("Back", Command.BACK, 0);//GEN-LINE:|86-getter|1|86-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|86-getter|2|
+        return backCommand4;
+    }
+//</editor-fold>//GEN-END:|86-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: backCommand5 ">//GEN-BEGIN:|90-getter|0|90-preInit
+    /**
+     * Returns an initialized instance of backCommand5 component.
+     *
+     * @return the initialized component instance
+     */
+    public Command getBackCommand5() {
+        if (backCommand5 == null) {
+//GEN-END:|90-getter|0|90-preInit
+ // write pre-init user code here
+backCommand5 = new Command("Back", Command.BACK, 0);//GEN-LINE:|90-getter|1|90-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|90-getter|2|
+        return backCommand5;
+    }
+//</editor-fold>//GEN-END:|90-getter|2|
 
     /**
      * Returns a display instance.

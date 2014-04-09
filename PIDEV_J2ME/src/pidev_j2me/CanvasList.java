@@ -190,7 +190,8 @@ public class CanvasList extends Canvas
 			
 			for(int j = 0; j < itemRows; j++)
 			{
-				g.drawString(itemLines[i][j], textLeft, margin + borderWidth + padding + j * (linePadding + font.getHeight()), Graphics.TOP | Graphics.LEFT);
+                           g.drawString(itemLines[i][j], textLeft, margin + borderWidth + padding + j * (linePadding + font.getHeight()), Graphics.TOP | Graphics.LEFT);
+                           g.drawString(itemLines[i][j], textLeft, margin + borderWidth + padding + j+itemRows * (linePadding + font.getHeight()), Graphics.TOP | Graphics.LEFT);
 			}
 			
 			g.translate(0, - top);
