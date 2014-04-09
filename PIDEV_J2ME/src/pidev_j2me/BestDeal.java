@@ -28,6 +28,7 @@ public class BestDeal extends MIDlet implements CommandListener {
     private Spacer spacer1;
     private TextField textField1;
     private Alert alert;
+    private CanvasList canvasList;
     private Command exitCommand;
     private Command okCommand;
     private Command backCommand;
@@ -386,7 +387,7 @@ okCommand1 = new Command("se connecter", Command.OK, 0);//GEN-LINE:|34-getter|1|
  // enter pre-if user code here
 if (true) {//GEN-LINE:|38-if|1|39-preAction
  // write pre-action user code here
-//GEN-LINE:|38-if|2|39-postAction
+switchDisplayable(null, getCanvasList());//GEN-LINE:|38-if|2|39-postAction
  // write post-action user code here
 } else {//GEN-LINE:|38-if|3|40-preAction
  // write pre-action user code here
@@ -404,7 +405,8 @@ switchDisplayable(null, getAlert());//GEN-LINE:|38-if|4|40-postAction
      * @return the initialized component instance
      */
     public Alert getAlert() {
-        if (alert == null) {//GEN-END:|42-getter|0|42-preInit
+        if (alert == null) {
+//GEN-END:|42-getter|0|42-preInit
  // write pre-init user code here
 alert = new Alert("alert");//GEN-BEGIN:|42-getter|1|42-postInit
             alert.addCommand(getBackCommand1());
@@ -423,7 +425,8 @@ alert = new Alert("alert");//GEN-BEGIN:|42-getter|1|42-postInit
      * @return the initialized component instance
      */
     public Command getBackCommand1() {
-        if (backCommand1 == null) {//GEN-END:|44-getter|0|44-preInit
+        if (backCommand1 == null) {
+//GEN-END:|44-getter|0|44-preInit
  // write pre-init user code here
 backCommand1 = new Command("Back", Command.BACK, 0);//GEN-LINE:|44-getter|1|44-postInit
  // write post-init user code here
@@ -431,6 +434,24 @@ backCommand1 = new Command("Back", Command.BACK, 0);//GEN-LINE:|44-getter|1|44-p
         return backCommand1;
     }
 //</editor-fold>//GEN-END:|44-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: canvasList ">//GEN-BEGIN:|47-getter|0|47-preInit
+    /**
+     * Returns an initialized instance of canvasList component.
+     *
+     * @return the initialized component instance
+     */
+    public CanvasList getCanvasList() {
+        if (canvasList == null) {//GEN-END:|47-getter|0|47-preInit
+ // write pre-init user code here
+canvasList = new CanvasList(null, null, null);//GEN-BEGIN:|47-getter|1|47-postInit
+            canvasList.setTitle("canvasList");
+            canvasList.setFullScreenMode(true);//GEN-END:|47-getter|1|47-postInit
+  
+}//GEN-BEGIN:|47-getter|2|
+        return canvasList;
+    }
+//</editor-fold>//GEN-END:|47-getter|2|
 
     /**
      * Returns a display instance.
