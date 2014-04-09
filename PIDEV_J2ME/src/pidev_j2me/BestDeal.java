@@ -27,10 +27,12 @@ public class BestDeal extends MIDlet implements CommandListener {
     private TextField textField;
     private Spacer spacer1;
     private TextField textField1;
+    private Alert alert;
     private Command exitCommand;
     private Command okCommand;
     private Command backCommand;
     private Command okCommand1;
+    private Command backCommand1;
     private Image image1;
 //</editor-fold>//GEN-END:|fields|0|
     /**
@@ -130,19 +132,25 @@ switchDisplayable(null, getInternauteDeals());//GEN-LINE:|7-commandAction|6|32-p
  // write post-action user code here
 } else if (command == okCommand1) {//GEN-LINE:|7-commandAction|7|35-preAction
  // write pre-action user code here
-//GEN-LINE:|7-commandAction|8|35-postAction
+LoginMethod();//GEN-LINE:|7-commandAction|8|35-postAction
  // write post-action user code here
-}//GEN-BEGIN:|7-commandAction|9|16-preAction
-} else if (displayable == splashScreen) {
-    if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|9|16-preAction
+}//GEN-BEGIN:|7-commandAction|9|45-preAction
+} else if (displayable == alert) {
+    if (command == backCommand1) {//GEN-END:|7-commandAction|9|45-preAction
  // write pre-action user code here
-switchDisplayable(null, getInternauteDeals());//GEN-LINE:|7-commandAction|10|16-postAction
+switchDisplayable(null, getLoginForm());//GEN-LINE:|7-commandAction|10|45-postAction
  // write post-action user code here
-}//GEN-BEGIN:|7-commandAction|11|7-postCommandAction
-        }//GEN-END:|7-commandAction|11|7-postCommandAction
+}//GEN-BEGIN:|7-commandAction|11|16-preAction
+} else if (displayable == splashScreen) {
+    if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|11|16-preAction
+ // write pre-action user code here
+switchDisplayable(null, getInternauteDeals());//GEN-LINE:|7-commandAction|12|16-postAction
  // write post-action user code here
-}//GEN-BEGIN:|7-commandAction|12|
-//</editor-fold>//GEN-END:|7-commandAction|12|
+}//GEN-BEGIN:|7-commandAction|13|7-postCommandAction
+        }//GEN-END:|7-commandAction|13|7-postCommandAction
+ // write post-action user code here
+}//GEN-BEGIN:|7-commandAction|14|
+//</editor-fold>//GEN-END:|7-commandAction|14|
 
 //<editor-fold defaultstate="collapsed" desc=" Generated Getter: splashScreen ">//GEN-BEGIN:|14-getter|0|14-preInit
     /**
@@ -368,6 +376,61 @@ okCommand1 = new Command("se connecter", Command.OK, 0);//GEN-LINE:|34-getter|1|
         return okCommand1;
     }
 //</editor-fold>//GEN-END:|34-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Method: LoginMethod ">//GEN-BEGIN:|38-if|0|38-preIf
+    /**
+     * Performs an action assigned to the LoginMethod if-point.
+     */
+    public void LoginMethod() {
+//GEN-END:|38-if|0|38-preIf
+ // enter pre-if user code here
+if (true) {//GEN-LINE:|38-if|1|39-preAction
+ // write pre-action user code here
+//GEN-LINE:|38-if|2|39-postAction
+ // write post-action user code here
+} else {//GEN-LINE:|38-if|3|40-preAction
+ // write pre-action user code here
+switchDisplayable(null, getAlert());//GEN-LINE:|38-if|4|40-postAction
+ // write post-action user code here
+}//GEN-LINE:|38-if|5|38-postIf
+ // enter post-if user code here
+}//GEN-BEGIN:|38-if|6|
+//</editor-fold>//GEN-END:|38-if|6|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: alert ">//GEN-BEGIN:|42-getter|0|42-preInit
+    /**
+     * Returns an initialized instance of alert component.
+     *
+     * @return the initialized component instance
+     */
+    public Alert getAlert() {
+        if (alert == null) {//GEN-END:|42-getter|0|42-preInit
+ // write pre-init user code here
+alert = new Alert("alert");//GEN-BEGIN:|42-getter|1|42-postInit
+            alert.addCommand(getBackCommand1());
+            alert.setCommandListener(this);
+            alert.setTimeout(Alert.FOREVER);//GEN-END:|42-getter|1|42-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|42-getter|2|
+        return alert;
+    }
+//</editor-fold>//GEN-END:|42-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: backCommand1 ">//GEN-BEGIN:|44-getter|0|44-preInit
+    /**
+     * Returns an initialized instance of backCommand1 component.
+     *
+     * @return the initialized component instance
+     */
+    public Command getBackCommand1() {
+        if (backCommand1 == null) {//GEN-END:|44-getter|0|44-preInit
+ // write pre-init user code here
+backCommand1 = new Command("Back", Command.BACK, 0);//GEN-LINE:|44-getter|1|44-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|44-getter|2|
+        return backCommand1;
+    }
+//</editor-fold>//GEN-END:|44-getter|2|
 
     /**
      * Returns a display instance.
