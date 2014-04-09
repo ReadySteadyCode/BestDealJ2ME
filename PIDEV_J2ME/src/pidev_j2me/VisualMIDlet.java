@@ -23,10 +23,10 @@ public class VisualMIDlet extends MIDlet implements CommandListener,Runnable {
     private SplashScreen splashScreen;
     private Form internauteDeals;
     private Form Login;
-    private Spacer spacer;
-    private TextField loginField;
     private Spacer spacer1;
     private TextField passField;
+    private Spacer spacer;
+    private TextField loginField;
     private Alert alertCon;
     private Form DealListe;
     private Command exitCommand;
@@ -240,7 +240,7 @@ okCommand = new Command("s\'authentifier", Command.OK, 0);//GEN-LINE:|23-getter|
 try {//GEN-BEGIN:|25-getter|1|25-@java.io.IOException
                 image1 = Image.createImage("/a.png");
             } catch (java.io.IOException e) {//GEN-END:|25-getter|1|25-@java.io.IOException
-    e.printStackTrace();}//GEN-LINE:|25-getter|2|25-postInit
+            }//GEN-LINE:|25-getter|2|25-postInit
  // write post-init user code here
 }//GEN-BEGIN:|25-getter|3|
         return image1;
@@ -254,7 +254,7 @@ try {//GEN-BEGIN:|25-getter|1|25-@java.io.IOException
     public void LoginMethod() {
 //GEN-END:|32-if|0|32-preIf
  boolean nom=false;
-if (nom == true) {//GEN-LINE:|32-if|1|33-preAction
+        if (nom == true) {//GEN-LINE:|32-if|1|33-preAction
  // write pre-action user code here
 switchDisplayable(null, getDealListe());//GEN-LINE:|32-if|2|33-postAction
  // write post-action user code here

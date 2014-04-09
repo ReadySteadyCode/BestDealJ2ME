@@ -22,18 +22,18 @@
                     <Property name="condition" typeID="P#javacode" value="Vnom==true"/>
                     <Property name="true" typeID="C#IfTrueEventSource" value="R33"/>
                     <Property name="false" typeID="C#IfFalseEventSource" value="R34"/>
-                    <Component componentID="33" typeID="C#IfTrueEventSource">
-                        <Property name="eventHandler" typeID="C#EventHandler" value="R42"/>
-                        <Component componentID="42" typeID="C#SwitchDisplayableEventHandler">
-                            <Property name="eventSource" typeID="C#EventSource" value="R33"/>
-                            <Property name="displayable" typeID="Cjavax.microedition.lcdui.Displayable" value="R41"/>
-                        </Component>
-                    </Component>
                     <Component componentID="34" typeID="C#IfFalseEventSource">
                         <Property name="eventHandler" typeID="C#EventHandler" value="R36"/>
                         <Component componentID="36" typeID="C#SwitchDisplayableEventHandler">
                             <Property name="eventSource" typeID="C#EventSource" value="R34"/>
                             <Property name="displayable" typeID="Cjavax.microedition.lcdui.Displayable" value="R35"/>
+                        </Component>
+                    </Component>
+                    <Component componentID="33" typeID="C#IfTrueEventSource">
+                        <Property name="eventHandler" typeID="C#EventHandler" value="R42"/>
+                        <Component componentID="42" typeID="C#SwitchDisplayableEventHandler">
+                            <Property name="eventSource" typeID="C#EventSource" value="R33"/>
+                            <Property name="displayable" typeID="Cjavax.microedition.lcdui.Displayable" value="R41"/>
                         </Component>
                     </Component>
                 </Component>
@@ -112,6 +112,23 @@
                             <Property name="methodPoint" typeID="C#MethodPoint" value="R32"/>
                         </Component>
                     </Component>
+                    <Component componentID="46" typeID="Cjavax.microedition.lcdui.Spacer">
+                        <Property name="instanceName" typeID="Pjava.lang.String" value="Vspacer1"/>
+                        <Property name="codeGenerated" typeID="Pboolean" value="Vtrue"/>
+                        <Property name="label" typeID="Pjava.lang.String" value="Vspacer1"/>
+                        <Property name="preferredHeight" typeID="Pint" value="V15"/>
+                        <Property name="preferredWidth" typeID="Pint" value="V240"/>
+                        <Property name="itemCommandListener" typeID="C#ItemCommandListener" value="R8"/>
+                        <Property name="minWidth" typeID="Pint" value="V240"/>
+                    </Component>
+                    <Component componentID="47" typeID="Cjavax.microedition.lcdui.TextField">
+                        <Property name="instanceName" typeID="Pjava.lang.String" value="VpassField"/>
+                        <Property name="codeGenerated" typeID="Pboolean" value="Vtrue"/>
+                        <Property name="label" typeID="Pjava.lang.String" value="VMot de Passe"/>
+                        <Property name="itemCommandListener" typeID="C#ItemCommandListener" value="R8"/>
+                        <Property name="maxSize" typeID="Pint" value="V32"/>
+                        <Property name="constraints" typeID="Pint" value="V327680"/>
+                    </Component>
                     <Component componentID="44" typeID="Cjavax.microedition.lcdui.Spacer">
                         <Property name="instanceName" typeID="Pjava.lang.String" value="Vspacer"/>
                         <Property name="codeGenerated" typeID="Pboolean" value="Vtrue"/>
@@ -130,23 +147,6 @@
                         <Property name="text" typeID="Pjava.lang.String" value="V"/>
                         <Property name="maxSize" typeID="Pint" value="V250"/>
                         <Property name="constraints" typeID="Pint" value="V1"/>
-                    </Component>
-                    <Component componentID="46" typeID="Cjavax.microedition.lcdui.Spacer">
-                        <Property name="instanceName" typeID="Pjava.lang.String" value="Vspacer1"/>
-                        <Property name="codeGenerated" typeID="Pboolean" value="Vtrue"/>
-                        <Property name="label" typeID="Pjava.lang.String" value="Vspacer1"/>
-                        <Property name="preferredHeight" typeID="Pint" value="V15"/>
-                        <Property name="preferredWidth" typeID="Pint" value="V240"/>
-                        <Property name="itemCommandListener" typeID="C#ItemCommandListener" value="R8"/>
-                        <Property name="minWidth" typeID="Pint" value="V240"/>
-                    </Component>
-                    <Component componentID="47" typeID="Cjavax.microedition.lcdui.TextField">
-                        <Property name="instanceName" typeID="Pjava.lang.String" value="VpassField"/>
-                        <Property name="codeGenerated" typeID="Pboolean" value="Vtrue"/>
-                        <Property name="label" typeID="Pjava.lang.String" value="VMot de Passe"/>
-                        <Property name="itemCommandListener" typeID="C#ItemCommandListener" value="R8"/>
-                        <Property name="maxSize" typeID="Pint" value="V32"/>
-                        <Property name="constraints" typeID="Pint" value="V327680"/>
                     </Component>
                 </Component>
                 <Component componentID="35" typeID="Cjavax.microedition.lcdui.Alert">
@@ -212,12 +212,12 @@
         </Component>
     </Document>
     <FlowScene version="1">
-        <Node componentID="14" descriptorID="componentNode14" x="334" y="85"/>
+        <Node componentID="26" descriptorID="componentNode26" x="176" y="282"/>
         <Node componentID="35" descriptorID="componentNode35" x="617" y="301"/>
-        <Node componentID="32" descriptorID="componentNode32" x="454" y="214"/>
         <Node componentID="2" descriptorID="componentNode2" x="50" y="29"/>
         <Node componentID="41" descriptorID="componentNode41" x="552" y="369"/>
         <Node componentID="18" descriptorID="componentNode18" x="248" y="176"/>
-        <Node componentID="26" descriptorID="componentNode26" x="176" y="282"/>
+        <Node componentID="32" descriptorID="componentNode32" x="454" y="214"/>
+        <Node componentID="14" descriptorID="componentNode14" x="334" y="85"/>
     </FlowScene>
 </VisualDesign>
