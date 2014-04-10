@@ -12,6 +12,7 @@ import javax.microedition.lcdui.*;
 import javax.microedition.media.Manager;
 import javax.microedition.media.Player;
 import org.netbeans.microedition.lcdui.SplashScreen;
+import utils.GoogleMapsMoveCanvas;
 
 /**
  * @author Internet
@@ -25,8 +26,8 @@ public class BestDeal extends MIDlet implements CommandListener {
     private Form InternauteDeals;
     private Form LoginForm;
     private Spacer spacer;
-    private TextField textField;
     private Spacer spacer1;
+    private TextField textField;
     private TextField textField1;
     private Alert alert;
     private CanvasList canvasList;
@@ -34,21 +35,23 @@ public class BestDeal extends MIDlet implements CommandListener {
     private Form DetailVendeur;
     private Form CreateAccountForm;
     private Alert alertCreate;
+    private GoogleMapsMoveCanvas googleMapsMoveCanvas;
     private Command exitCommand;
     private Command okCommand;
     private Command backCommand;
     private Command okCommand1;
     private Command backCommand1;
     private Command okCommand2;
-    private Command backCommand2;
     private Command exitCommand1;
+    private Command backCommand2;
     private Command okCommand3;
     private Command okCommand4;
     private Command okCommand5;
-    private Command backCommand3;
     private Command okCommand6;
+    private Command backCommand3;
     private Command backCommand4;
     private Command backCommand5;
+    private Command backCommand6;
     private Image image1;
 //</editor-fold>//GEN-END:|fields|0|
     String[] items={"hello","ww","ww","ww"};
@@ -161,7 +164,7 @@ switchDisplayable(null, getDetailDeal());//GEN-LINE:|7-commandAction|8|91-postAc
  // write post-action user code here
 } else if (command == okCommand4) {//GEN-LINE:|7-commandAction|9|65-preAction
  // write pre-action user code here
-//GEN-LINE:|7-commandAction|10|65-postAction
+switchDisplayable(null, getGoogleMapsMoveCanvas());//GEN-LINE:|7-commandAction|10|65-postAction
  // write post-action user code here
 }//GEN-BEGIN:|7-commandAction|11|22-preAction
 } else if (displayable == InternauteDeals) {
@@ -209,17 +212,23 @@ exitMIDlet();//GEN-LINE:|7-commandAction|26|56-postAction
  // write pre-action user code here
 switchDisplayable(null, getDetailDeal());//GEN-LINE:|7-commandAction|28|50-postAction
  // write post-action user code here
-}//GEN-BEGIN:|7-commandAction|29|16-preAction
-} else if (displayable == splashScreen) {
-    if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|29|16-preAction
+}//GEN-BEGIN:|7-commandAction|29|96-preAction
+} else if (displayable == googleMapsMoveCanvas) {
+    if (command == backCommand6) {//GEN-END:|7-commandAction|29|96-preAction
  // write pre-action user code here
-switchDisplayable(null, getInternauteDeals());//GEN-LINE:|7-commandAction|30|16-postAction
+switchDisplayable(null, getDetailVendeur());//GEN-LINE:|7-commandAction|30|96-postAction
  // write post-action user code here
-}//GEN-BEGIN:|7-commandAction|31|7-postCommandAction
-        }//GEN-END:|7-commandAction|31|7-postCommandAction
+}//GEN-BEGIN:|7-commandAction|31|16-preAction
+} else if (displayable == splashScreen) {
+    if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|31|16-preAction
+ // write pre-action user code here
+switchDisplayable(null, getInternauteDeals());//GEN-LINE:|7-commandAction|32|16-postAction
  // write post-action user code here
-}//GEN-BEGIN:|7-commandAction|32|
-//</editor-fold>//GEN-END:|7-commandAction|32|
+}//GEN-BEGIN:|7-commandAction|33|7-postCommandAction
+        }//GEN-END:|7-commandAction|33|7-postCommandAction
+ // write post-action user code here
+}//GEN-BEGIN:|7-commandAction|34|
+//</editor-fold>//GEN-END:|7-commandAction|34|
 
 //<editor-fold defaultstate="collapsed" desc=" Generated Getter: splashScreen ">//GEN-BEGIN:|14-getter|0|14-preInit
     /**
@@ -260,7 +269,7 @@ splashScreen = new SplashScreen(getDisplay());//GEN-BEGIN:|14-getter|1|14-postIn
 try {//GEN-BEGIN:|18-getter|1|18-@java.io.IOException
                 image1 = Image.createImage("/a.png");
             } catch (java.io.IOException e) {//GEN-END:|18-getter|1|18-@java.io.IOException
-    e.printStackTrace();}//GEN-LINE:|18-getter|2|18-postInit
+            }//GEN-LINE:|18-getter|2|18-postInit
  // write post-init user code here
 }//GEN-BEGIN:|18-getter|3|
         return image1;
@@ -554,7 +563,7 @@ okCommand2 = new Command("Afficher les D\u00E9tails", Command.OK, 0);//GEN-LINE:
         if (DetailDeal == null) {
 //GEN-END:|58-getter|0|58-preInit
  // write pre-init user code here
-DetailDeal = new Form("Cr\u00E9er un Compte");//GEN-BEGIN:|58-getter|1|58-postInit
+DetailDeal = new Form("D\u00E9tail sur le Deal");//GEN-BEGIN:|58-getter|1|58-postInit
             DetailDeal.addCommand(getOkCommand3());
             DetailDeal.setCommandListener(this);//GEN-END:|58-getter|1|58-postInit
  // write post-init user code here
@@ -573,7 +582,7 @@ DetailDeal = new Form("Cr\u00E9er un Compte");//GEN-BEGIN:|58-getter|1|58-postIn
         if (DetailVendeur == null) {
 //GEN-END:|62-getter|0|62-preInit
  // write pre-init user code here
-DetailVendeur = new Form("form");//GEN-BEGIN:|62-getter|1|62-postInit
+DetailVendeur = new Form("D\u00E9tails sur le vendeur");//GEN-BEGIN:|62-getter|1|62-postInit
             DetailVendeur.addCommand(getOkCommand4());
             DetailVendeur.addCommand(getBackCommand5());
             DetailVendeur.setCommandListener(this);//GEN-END:|62-getter|1|62-postInit
@@ -795,6 +804,43 @@ backCommand5 = new Command("Back", Command.BACK, 0);//GEN-LINE:|90-getter|1|90-p
         return backCommand5;
     }
 //</editor-fold>//GEN-END:|90-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: googleMapsMoveCanvas ">//GEN-BEGIN:|93-getter|0|93-preInit
+    /**
+     * Returns an initialized instance of googleMapsMoveCanvas component.
+     *
+     * @return the initialized component instance
+     */
+    public GoogleMapsMoveCanvas getGoogleMapsMoveCanvas() {
+        if (googleMapsMoveCanvas == null) {
+//GEN-END:|93-getter|0|93-preInit
+ // write pre-init user code here
+googleMapsMoveCanvas = new GoogleMapsMoveCanvas(null, null);//GEN-BEGIN:|93-getter|1|93-postInit
+            googleMapsMoveCanvas.setTitle("googleMapsMoveCanvas");
+            googleMapsMoveCanvas.addCommand(getBackCommand6());
+            googleMapsMoveCanvas.setCommandListener(this);//GEN-END:|93-getter|1|93-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|93-getter|2|
+        return googleMapsMoveCanvas;
+    }
+//</editor-fold>//GEN-END:|93-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: backCommand6 ">//GEN-BEGIN:|95-getter|0|95-preInit
+    /**
+     * Returns an initialized instance of backCommand6 component.
+     *
+     * @return the initialized component instance
+     */
+    public Command getBackCommand6() {
+        if (backCommand6 == null) {
+//GEN-END:|95-getter|0|95-preInit
+ // write pre-init user code here
+backCommand6 = new Command("Back", Command.BACK, 0);//GEN-LINE:|95-getter|1|95-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|95-getter|2|
+        return backCommand6;
+    }
+//</editor-fold>//GEN-END:|95-getter|2|
 
     /**
      * Returns a display instance.
