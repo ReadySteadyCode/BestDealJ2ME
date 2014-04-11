@@ -23,9 +23,6 @@ abstract public class GoogleMapsTestCanvas extends Canvas {
 		this.midlet = m;
 		this.testListScreen = testListScreen;
 		
-		
-		
-		
 	}
 	
 	

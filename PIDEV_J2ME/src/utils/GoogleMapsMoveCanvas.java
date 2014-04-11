@@ -11,13 +11,21 @@ import com.jappit.midmaps.googlemaps.GoogleMapsMarker;
 import com.jappit.midmaps.googlemaps.GoogleStaticMap;
 import com.jappit.midmaps.googlemaps.GoogleStaticMapHandler;
 
+
+
 public class GoogleMapsMoveCanvas extends GoogleMapsTestCanvas implements GoogleStaticMapHandler
 {
 	GoogleMaps gMaps = null;
 	GoogleStaticMap map = null;
+        public double a=36.899668;
+        public double b=10.189145;
+        
+        
+       
 	
 	public GoogleMapsMoveCanvas(MIDlet m, Displayable testListScreen)
 	{
+            
 		super(m, testListScreen);
 		
 		gMaps = new GoogleMaps();
@@ -25,8 +33,9 @@ public class GoogleMapsMoveCanvas extends GoogleMapsTestCanvas implements Google
 		map = gMaps.createMap(getWidth(), getHeight(), GoogleStaticMap.FORMAT_PNG);
 		
 		map.setHandler(this);
+                
 		
-		map.setCenter(new GoogleMapsCoordinates(36.899668, 10.189143));
+		map.setCenter(new GoogleMapsCoordinates(a, b));
                 GoogleMapsMarker redMarker = new GoogleMapsMarker(new GoogleMapsCoordinates(36.899668, 10.189143));
 		redMarker.setColor(GoogleStaticMap.COLOR_RED);
 		redMarker.setSize(GoogleMapsMarker.SIZE_MID);
@@ -57,5 +66,12 @@ public class GoogleMapsMoveCanvas extends GoogleMapsTestCanvas implements Google
 		{
 			map.move(gameAction);
 		}
+                if (gameAction== Canvas.FIRE){
+                    map.zoomIn();
+                }
+                if (gameAction== Canvas.GAME_A){
+                    map.zoomOut();
+                }
 	}
+       
 }

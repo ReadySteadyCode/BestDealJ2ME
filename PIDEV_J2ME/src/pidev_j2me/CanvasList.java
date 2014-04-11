@@ -25,16 +25,16 @@ public class CanvasList extends Canvas
 	protected int padding = 2;
 	protected Font font = Font.getDefaultFont();
 	
-	protected int bgColor = 0xffffff;
+	protected int bgColor = 0x000000;
 	
 	protected int foreColor = 0x000000;
-	protected int foreSelectedColor = 0xffffff;
+	protected int foreSelectedColor = 0x000000;
 	protected int backColor = 0xffffff;
-	protected int backSelectedColor = 0x0000ff;
+	protected int backSelectedColor = 0xeabfcb;
 	
 	protected int borderWidth = 3;
-	protected int borderColor = 0x000000;
-	protected int borderSelectedColor = 0xff0000;
+	protected int borderColor = 0xcc69b1;
+	protected int borderSelectedColor = 0x39a5a0;
 	
 	// will contain item splitted lines
 	String[][] itemLines = null;
@@ -60,7 +60,7 @@ public class CanvasList extends Canvas
 		itemLines = new String[items.length][];
 		
 		itemsTop = new int[itemLines.length];
-		itemsHeight = new int[itemLines.length];
+		itemsHeight = new int[itemLines.length*2];
 		
 		for(int i = 0; i < itemLines.length; i++)
 		{

@@ -3,37 +3,65 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pidev_j2me;
 
+import handlers.DealHandler;
+import java.io.DataInputStream;
 import java.io.IOException;
-import javax.microedition.midlet.*;
+import javax.microedition.io.Connector;
+import javax.microedition.io.HttpConnection;
 import javax.microedition.lcdui.*;
 import javax.microedition.media.Manager;
 import javax.microedition.media.Player;
+import javax.microedition.midlet.*;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import org.netbeans.microedition.lcdui.SplashScreen;
+import org.xml.sax.SAXException;
 import utils.GoogleMapsMoveCanvas;
 
 /**
  * @author Internet
  */
-public class BestDeal extends MIDlet implements CommandListener {
-    
-    private boolean midletPaused = false;
+public class BestDeal extends MIDlet implements CommandListener, Runnable {
 
+    private boolean midletPaused = false;
+    
+    DealHandler dealHandler;
+    double aa;
+    double bb;
+     HttpConnection hc;
+    DataInputStream dis;
+    String url = "http://localhost:1234/pidv/ajout.php";
+    String url1 = "http://localhost:1234/pidv/mot.php";
+    StringBuffer sb = new StringBuffer();
+    int ch;
+     Alert a1 = new Alert("Sorry","Votre champ vide", null, AlertType.WARNING);
+    int x;
+    int id_client;
+    boolean nom,prenom;
 //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private SplashScreen splashScreen;
     private Form InternauteDeals;
     private Form LoginForm;
     private Spacer spacer;
     private Spacer spacer1;
-    private TextField textField;
-    private TextField textField1;
+    private TextField tfn;
+    private TextField tfp;
     private Alert alert;
     private CanvasList canvasList;
     private Form DetailDeal;
     private Form DetailVendeur;
     private Form CreateAccountForm;
+    private TextField tfNom;
+    private TextField tfPrenom;
+    private TextField tfPass;
+    private TextField tfTel;
+    private TextField tfEmail;
+    private TextField tfCIN;
+    private ChoiceGroup groupe1;
+    private DateField dateField;
     private Alert alertCreate;
     private GoogleMapsMoveCanvas googleMapsMoveCanvas;
     private Command exitCommand;
@@ -47,21 +75,23 @@ public class BestDeal extends MIDlet implements CommandListener {
     private Command okCommand3;
     private Command okCommand4;
     private Command okCommand5;
-    private Command okCommand6;
+    private Command cmdValider;
     private Command backCommand3;
     private Command backCommand4;
-    private Command backCommand5;
     private Command backCommand6;
+    private Command backCommand5;
     private Image image1;
 //</editor-fold>//GEN-END:|fields|0|
-    String[] items={"hello","ww","ww","ww"};
+    String[] items = {"hello", "ww", "ww", "ww"};
+    
     Image[] imageElements;
+
     /**
      * The BestDeal constructor.
      */
     public BestDeal() {
         try {
-            this.imageElements = new Image[]{Image.createImage("/dotnet.png"),Image.createImage("/a.png"),getImage1(),getImage1()};
+            this.imageElements = new Image[]{Image.createImage("/dotnet.png"), Image.createImage("/a.png"), getImage1(), getImage1()};
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -89,8 +119,8 @@ public class BestDeal extends MIDlet implements CommandListener {
      */
     public void startMIDlet() {
 //GEN-END:|3-startMIDlet|0|3-preAction
-        // write pre-action user code here
-switchDisplayable(null, getSplashScreen());//GEN-LINE:|3-startMIDlet|1|3-postAction
+       
+        switchDisplayable(null, getSplashScreen());//GEN-LINE:|3-startMIDlet|1|3-postAction
         // write post-action user code here
 }//GEN-BEGIN:|3-startMIDlet|2|
 //</editor-fold>//GEN-END:|3-startMIDlet|2|
@@ -140,35 +170,36 @@ Display display = getDisplay();//GEN-BEGIN:|5-switchDisplayable|1|5-postSwitch
      */
     public void commandAction(Command command, Displayable displayable) {
 //GEN-END:|7-commandAction|0|7-preCommandAction
- // write pre-action user code here
-if (displayable == CreateAccountForm) {//GEN-BEGIN:|7-commandAction|1|74-preAction
+  
+        if (displayable == CreateAccountForm) {//GEN-BEGIN:|7-commandAction|1|74-preAction
             if (command == backCommand3) {//GEN-END:|7-commandAction|1|74-preAction
  // write pre-action user code here
 switchDisplayable(null, getLoginForm());//GEN-LINE:|7-commandAction|2|74-postAction
  // write post-action user code here
-} else if (command == okCommand6) {//GEN-LINE:|7-commandAction|3|77-preAction
+} else if (command == cmdValider) {//GEN-LINE:|7-commandAction|3|77-preAction
  // write pre-action user code here
 Createmethod();//GEN-LINE:|7-commandAction|4|77-postAction
  // write post-action user code here
 }//GEN-BEGIN:|7-commandAction|5|61-preAction
-} else if (displayable == DetailDeal) {
-    if (command == okCommand3) {//GEN-END:|7-commandAction|5|61-preAction
+        } else if (displayable == DetailDeal) {
+            if (command == okCommand3) {//GEN-END:|7-commandAction|5|61-preAction
  // write pre-action user code here
 switchDisplayable(null, getDetailVendeur());//GEN-LINE:|7-commandAction|6|61-postAction
  // write post-action user code here
 }//GEN-BEGIN:|7-commandAction|7|91-preAction
-} else if (displayable == DetailVendeur) {
-    if (command == backCommand5) {//GEN-END:|7-commandAction|7|91-preAction
+        } else if (displayable == DetailVendeur) {
+            if (command == backCommand5) {//GEN-END:|7-commandAction|7|91-preAction
  // write pre-action user code here
 switchDisplayable(null, getDetailDeal());//GEN-LINE:|7-commandAction|8|91-postAction
  // write post-action user code here
 } else if (command == okCommand4) {//GEN-LINE:|7-commandAction|9|65-preAction
- // write pre-action user code here
-switchDisplayable(null, getGoogleMapsMoveCanvas());//GEN-LINE:|7-commandAction|10|65-postAction
+ Thread th = new Thread(this);
+            th.start();
+                switchDisplayable(null, getGoogleMapsMoveCanvas());//GEN-LINE:|7-commandAction|10|65-postAction
  // write post-action user code here
 }//GEN-BEGIN:|7-commandAction|11|22-preAction
-} else if (displayable == InternauteDeals) {
-    if (command == exitCommand) {//GEN-END:|7-commandAction|11|22-preAction
+        } else if (displayable == InternauteDeals) {
+            if (command == exitCommand) {//GEN-END:|7-commandAction|11|22-preAction
  // write pre-action user code here
 exitMIDlet();//GEN-LINE:|7-commandAction|12|22-postAction
  // write post-action user code here
@@ -177,8 +208,8 @@ exitMIDlet();//GEN-LINE:|7-commandAction|12|22-postAction
 switchDisplayable(null, getLoginForm());//GEN-LINE:|7-commandAction|14|24-postAction
  // write post-action user code here
 }//GEN-BEGIN:|7-commandAction|15|32-preAction
-} else if (displayable == LoginForm) {
-    if (command == backCommand) {//GEN-END:|7-commandAction|15|32-preAction
+        } else if (displayable == LoginForm) {
+            if (command == backCommand) {//GEN-END:|7-commandAction|15|32-preAction
  // write pre-action user code here
 switchDisplayable(null, getInternauteDeals());//GEN-LINE:|7-commandAction|16|32-postAction
  // write post-action user code here
@@ -191,20 +222,20 @@ LoginMethod();//GEN-LINE:|7-commandAction|18|35-postAction
 switchDisplayable(null, getCreateAccountForm());//GEN-LINE:|7-commandAction|20|68-postAction
  // write post-action user code here
 }//GEN-BEGIN:|7-commandAction|21|45-preAction
-} else if (displayable == alert) {
-    if (command == backCommand1) {//GEN-END:|7-commandAction|21|45-preAction
+        } else if (displayable == alert) {
+            if (command == backCommand1) {//GEN-END:|7-commandAction|21|45-preAction
  // write pre-action user code here
 switchDisplayable(null, getLoginForm());//GEN-LINE:|7-commandAction|22|45-postAction
  // write post-action user code here
 }//GEN-BEGIN:|7-commandAction|23|87-preAction
-} else if (displayable == alertCreate) {
-    if (command == backCommand4) {//GEN-END:|7-commandAction|23|87-preAction
+        } else if (displayable == alertCreate) {
+            if (command == backCommand4) {//GEN-END:|7-commandAction|23|87-preAction
  // write pre-action user code here
 switchDisplayable(null, getCreateAccountForm());//GEN-LINE:|7-commandAction|24|87-postAction
  // write post-action user code here
 }//GEN-BEGIN:|7-commandAction|25|56-preAction
-} else if (displayable == canvasList) {
-    if (command == exitCommand1) {//GEN-END:|7-commandAction|25|56-preAction
+        } else if (displayable == canvasList) {
+            if (command == exitCommand1) {//GEN-END:|7-commandAction|25|56-preAction
  // write pre-action user code here
 exitMIDlet();//GEN-LINE:|7-commandAction|26|56-postAction
  // write post-action user code here
@@ -213,14 +244,14 @@ exitMIDlet();//GEN-LINE:|7-commandAction|26|56-postAction
 switchDisplayable(null, getDetailDeal());//GEN-LINE:|7-commandAction|28|50-postAction
  // write post-action user code here
 }//GEN-BEGIN:|7-commandAction|29|96-preAction
-} else if (displayable == googleMapsMoveCanvas) {
-    if (command == backCommand6) {//GEN-END:|7-commandAction|29|96-preAction
+        } else if (displayable == googleMapsMoveCanvas) {
+            if (command == backCommand6) {//GEN-END:|7-commandAction|29|96-preAction
  // write pre-action user code here
 switchDisplayable(null, getDetailVendeur());//GEN-LINE:|7-commandAction|30|96-postAction
  // write post-action user code here
 }//GEN-BEGIN:|7-commandAction|31|16-preAction
-} else if (displayable == splashScreen) {
-    if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|31|16-preAction
+        } else if (displayable == splashScreen) {
+            if (command == SplashScreen.DISMISS_COMMAND) {//GEN-END:|7-commandAction|31|16-preAction
  // write pre-action user code here
 switchDisplayable(null, getInternauteDeals());//GEN-LINE:|7-commandAction|32|16-postAction
  // write post-action user code here
@@ -245,12 +276,12 @@ splashScreen = new SplashScreen(getDisplay());//GEN-BEGIN:|14-getter|1|14-postIn
             splashScreen.setCommandListener(this);
             splashScreen.setFullScreenMode(true);
             splashScreen.setImage(getImage1());//GEN-END:|14-getter|1|14-postInit
- try {
-      Player player = Manager.createPlayer(getClass().getResourceAsStream("/starting.wav"), "audio/x-wav");
-      player.start();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+            try {
+                Player player = Manager.createPlayer(getClass().getResourceAsStream("/starting.wav"), "audio/x-wav");
+                player.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }//GEN-BEGIN:|14-getter|2|
         return splashScreen;
     }
@@ -306,13 +337,13 @@ InternauteDeals = new Form("Liste des Deals");//GEN-BEGIN:|19-getter|1|19-postIn
         if (LoginForm == null) {
 //GEN-END:|26-getter|0|26-preInit
  // write pre-init user code here
-LoginForm = new Form("form", new Item[]{getSpacer(), getTextField(), getSpacer1(), getTextField1()});//GEN-BEGIN:|26-getter|1|26-postInit
+LoginForm = new Form("form", new Item[]{getSpacer(), getTfn(), getSpacer1(), getTfp()});//GEN-BEGIN:|26-getter|1|26-postInit
             LoginForm.addCommand(getBackCommand());
             LoginForm.addCommand(getOkCommand1());
             LoginForm.addCommand(getOkCommand5());
             LoginForm.setCommandListener(this);//GEN-END:|26-getter|1|26-postInit
- // write post-init user code here
-}//GEN-BEGIN:|26-getter|2|
+
+        }//GEN-BEGIN:|26-getter|2|
         return LoginForm;
     }
 //</editor-fold>//GEN-END:|26-getter|2|
@@ -336,20 +367,20 @@ spacer = new Spacer(240, 1);//GEN-BEGIN:|27-getter|1|27-postInit
     }
 //</editor-fold>//GEN-END:|27-getter|2|
 
-//<editor-fold defaultstate="collapsed" desc=" Generated Getter: textField ">//GEN-BEGIN:|28-getter|0|28-preInit
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: tfn ">//GEN-BEGIN:|28-getter|0|28-preInit
     /**
-     * Returns an initialized instance of textField component.
+     * Returns an initialized instance of tfn component.
      *
      * @return the initialized component instance
      */
-    public TextField getTextField() {
-        if (textField == null) {
+    public TextField getTfn() {
+        if (tfn == null) {
 //GEN-END:|28-getter|0|28-preInit
  // write pre-init user code here
-textField = new TextField("E-mail", null, 32, TextField.EMAILADDR);//GEN-LINE:|28-getter|1|28-postInit
+tfn = new TextField("E-mail", null, 32, TextField.EMAILADDR);//GEN-LINE:|28-getter|1|28-postInit
  // write post-init user code here
 }//GEN-BEGIN:|28-getter|2|
-        return textField;
+        return tfn;
     }
 //</editor-fold>//GEN-END:|28-getter|2|
 
@@ -371,20 +402,20 @@ spacer1 = new Spacer(240, 1);//GEN-BEGIN:|29-getter|1|29-postInit
     }
 //</editor-fold>//GEN-END:|29-getter|2|
 
-//<editor-fold defaultstate="collapsed" desc=" Generated Getter: textField1 ">//GEN-BEGIN:|30-getter|0|30-preInit
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: tfp ">//GEN-BEGIN:|30-getter|0|30-preInit
     /**
-     * Returns an initialized instance of textField1 component.
+     * Returns an initialized instance of tfp component.
      *
      * @return the initialized component instance
      */
-    public TextField getTextField1() {
-        if (textField1 == null) {
+    public TextField getTfp() {
+        if (tfp == null) {
 //GEN-END:|30-getter|0|30-preInit
  // write pre-init user code here
-textField1 = new TextField("Mot de Passe", null, 32, TextField.ANY | TextField.PASSWORD | TextField.SENSITIVE);//GEN-LINE:|30-getter|1|30-postInit
+tfp = new TextField("Mot de Passe", null, 32, TextField.ANY | TextField.PASSWORD | TextField.SENSITIVE);//GEN-LINE:|30-getter|1|30-postInit
  // write post-init user code here
 }//GEN-BEGIN:|30-getter|2|
-        return textField1;
+        return tfp;
     }
 //</editor-fold>//GEN-END:|30-getter|2|
 
@@ -462,14 +493,37 @@ okCommand1 = new Command("se connecter", Command.OK, 0);//GEN-LINE:|34-getter|1|
      */
     public void LoginMethod() {
 //GEN-END:|38-if|0|38-preIf
- boolean nom = true;
+         x=2;
+//             if (tfp.getString().equals("")) {
+//               a1.setTimeout(Alert.FOREVER);
+//                getDisplay().setCurrent(a1);}
+//             if (tfn.getString().equals("")) {
+//                a1.setTimeout(Alert.FOREVER);
+//                getDisplay().setCurrent(a1);}
+         System.out.println(nom);
+            Thread th1 = new Thread(BestDeal.this);
+            th1.start();
+        try {
+            th1.join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        System.out.println(nom);
+       
         if (nom == true) {//GEN-LINE:|38-if|1|39-preAction
- // write pre-action user code here
+ x=3;
+ Thread th2 = new Thread(BestDeal.this);
+ th2.start();
+  try {
+            th2.join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
 switchDisplayable(null, getCanvasList());//GEN-LINE:|38-if|2|39-postAction
- // write post-action user code here
+ 
 } else {//GEN-LINE:|38-if|3|40-preAction
- // write pre-action user code here
-switchDisplayable(null, getAlert());//GEN-LINE:|38-if|4|40-postAction
+            System.out.println(nom);
+            switchDisplayable(null, getAlert());//GEN-LINE:|38-if|4|40-postAction
  // write post-action user code here
 }//GEN-LINE:|38-if|5|38-postIf
  // enter post-if user code here
@@ -528,12 +582,11 @@ canvasList = new CanvasList("Ma Liste de Deals", items, imageElements);//GEN-BEG
             canvasList.addCommand(getOkCommand2());
             canvasList.addCommand(getExitCommand1());
             canvasList.setCommandListener(this);//GEN-END:|47-getter|1|47-postInit
-  
+
         }//GEN-BEGIN:|47-getter|2|
         return canvasList;
     }
 //</editor-fold>//GEN-END:|47-getter|2|
-
 
 
 //<editor-fold defaultstate="collapsed" desc=" Generated Getter: okCommand2 ">//GEN-BEGIN:|49-getter|0|49-preInit
@@ -666,8 +719,12 @@ okCommand4 = new Command("Afficher sur la carte", Command.OK, 0);//GEN-LINE:|64-
      */
     public void Createmethod() {
 //GEN-END:|78-if|0|78-preIf
- // enter pre-if user code here
-if (true) {//GEN-LINE:|78-if|1|79-preAction
+ x=1;
+ 
+ Thread th0 = new Thread(this);
+ th0.start();
+ 
+        if (prenom = true) {//GEN-LINE:|78-if|1|79-preAction
  // write pre-action user code here
 switchDisplayable(null, getLoginForm());//GEN-LINE:|78-if|2|79-postAction
  // write post-action user code here
@@ -690,9 +747,9 @@ switchDisplayable(null, getAlertCreate());//GEN-LINE:|78-if|4|80-postAction
         if (CreateAccountForm == null) {
 //GEN-END:|71-getter|0|71-preInit
  // write pre-init user code here
-CreateAccountForm = new Form("form1");//GEN-BEGIN:|71-getter|1|71-postInit
+CreateAccountForm = new Form("form1", new Item[]{getTfNom(), getTfPrenom(), getTfPass(), getTfTel(), getTfEmail(), getTfCIN(), getGroupe1(), getDateField()});//GEN-BEGIN:|71-getter|1|71-postInit
             CreateAccountForm.addCommand(getBackCommand3());
-            CreateAccountForm.addCommand(getOkCommand6());
+            CreateAccountForm.addCommand(getCmdValider());
             CreateAccountForm.setCommandListener(this);//GEN-END:|71-getter|1|71-postInit
  // write post-init user code here
 }//GEN-BEGIN:|71-getter|2|
@@ -754,20 +811,20 @@ backCommand3 = new Command("Back", Command.BACK, 0);//GEN-LINE:|73-getter|1|73-p
     }
 //</editor-fold>//GEN-END:|73-getter|2|
 
-//<editor-fold defaultstate="collapsed" desc=" Generated Getter: okCommand6 ">//GEN-BEGIN:|76-getter|0|76-preInit
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: cmdValider ">//GEN-BEGIN:|76-getter|0|76-preInit
     /**
-     * Returns an initialized instance of okCommand6 component.
+     * Returns an initialized instance of cmdValider component.
      *
      * @return the initialized component instance
      */
-    public Command getOkCommand6() {
-        if (okCommand6 == null) {
+    public Command getCmdValider() {
+        if (cmdValider == null) {
 //GEN-END:|76-getter|0|76-preInit
  // write pre-init user code here
-okCommand6 = new Command("Cr\u00E9er", Command.OK, 0);//GEN-LINE:|76-getter|1|76-postInit
+cmdValider = new Command("Cr\u00E9er", Command.OK, 0);//GEN-LINE:|76-getter|1|76-postInit
  // write post-init user code here
 }//GEN-BEGIN:|76-getter|2|
-        return okCommand6;
+        return cmdValider;
     }
 //</editor-fold>//GEN-END:|76-getter|2|
 
@@ -819,8 +876,8 @@ googleMapsMoveCanvas = new GoogleMapsMoveCanvas(null, null);//GEN-BEGIN:|93-gett
             googleMapsMoveCanvas.setTitle("googleMapsMoveCanvas");
             googleMapsMoveCanvas.addCommand(getBackCommand6());
             googleMapsMoveCanvas.setCommandListener(this);//GEN-END:|93-getter|1|93-postInit
- // write post-init user code here
-}//GEN-BEGIN:|93-getter|2|
+           
+        }//GEN-BEGIN:|93-getter|2|
         return googleMapsMoveCanvas;
     }
 //</editor-fold>//GEN-END:|93-getter|2|
@@ -841,6 +898,146 @@ backCommand6 = new Command("Back", Command.BACK, 0);//GEN-LINE:|95-getter|1|95-p
         return backCommand6;
     }
 //</editor-fold>//GEN-END:|95-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: tfNom ">//GEN-BEGIN:|98-getter|0|98-preInit
+    /**
+     * Returns an initialized instance of tfNom component.
+     *
+     * @return the initialized component instance
+     */
+    public TextField getTfNom() {
+        if (tfNom == null) {
+//GEN-END:|98-getter|0|98-preInit
+ // write pre-init user code here
+tfNom = new TextField("Nom", null, 32, TextField.ANY);//GEN-LINE:|98-getter|1|98-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|98-getter|2|
+        return tfNom;
+    }
+//</editor-fold>//GEN-END:|98-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: tfPrenom ">//GEN-BEGIN:|99-getter|0|99-preInit
+    /**
+     * Returns an initialized instance of tfPrenom component.
+     *
+     * @return the initialized component instance
+     */
+    public TextField getTfPrenom() {
+        if (tfPrenom == null) {
+//GEN-END:|99-getter|0|99-preInit
+ // write pre-init user code here
+tfPrenom = new TextField("Pr\u00E9nom", null, 32, TextField.ANY);//GEN-LINE:|99-getter|1|99-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|99-getter|2|
+        return tfPrenom;
+    }
+//</editor-fold>//GEN-END:|99-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: tfPass ">//GEN-BEGIN:|100-getter|0|100-preInit
+    /**
+     * Returns an initialized instance of tfPass component.
+     *
+     * @return the initialized component instance
+     */
+    public TextField getTfPass() {
+        if (tfPass == null) {
+//GEN-END:|100-getter|0|100-preInit
+ // write pre-init user code here
+tfPass = new TextField("Mot de Passe", null, 32, TextField.ANY | TextField.PASSWORD);//GEN-LINE:|100-getter|1|100-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|100-getter|2|
+        return tfPass;
+    }
+//</editor-fold>//GEN-END:|100-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: tfTel ">//GEN-BEGIN:|101-getter|0|101-preInit
+    /**
+     * Returns an initialized instance of tfTel component.
+     *
+     * @return the initialized component instance
+     */
+    public TextField getTfTel() {
+        if (tfTel == null) {
+//GEN-END:|101-getter|0|101-preInit
+ // write pre-init user code here
+tfTel = new TextField("T\u00E9l\u00E9phone", null, 32, TextField.NUMERIC);//GEN-LINE:|101-getter|1|101-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|101-getter|2|
+        return tfTel;
+    }
+//</editor-fold>//GEN-END:|101-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: tfEmail ">//GEN-BEGIN:|102-getter|0|102-preInit
+    /**
+     * Returns an initialized instance of tfEmail component.
+     *
+     * @return the initialized component instance
+     */
+    public TextField getTfEmail() {
+        if (tfEmail == null) {
+//GEN-END:|102-getter|0|102-preInit
+ // write pre-init user code here
+tfEmail = new TextField("E-Mail", null, 32, TextField.EMAILADDR);//GEN-LINE:|102-getter|1|102-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|102-getter|2|
+        return tfEmail;
+    }
+//</editor-fold>//GEN-END:|102-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: tfCIN ">//GEN-BEGIN:|103-getter|0|103-preInit
+    /**
+     * Returns an initialized instance of tfCIN component.
+     *
+     * @return the initialized component instance
+     */
+    public TextField getTfCIN() {
+        if (tfCIN == null) {
+//GEN-END:|103-getter|0|103-preInit
+ // write pre-init user code here
+tfCIN = new TextField("CIN", null, 32, TextField.NUMERIC);//GEN-LINE:|103-getter|1|103-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|103-getter|2|
+        return tfCIN;
+    }
+//</editor-fold>//GEN-END:|103-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: groupe1 ">//GEN-BEGIN:|104-getter|0|104-preInit
+    /**
+     * Returns an initialized instance of groupe1 component.
+     *
+     * @return the initialized component instance
+     */
+    public ChoiceGroup getGroupe1() {
+        if (groupe1 == null) {
+//GEN-END:|104-getter|0|104-preInit
+ // write pre-init user code here
+groupe1 = new ChoiceGroup("Sexe", Choice.EXCLUSIVE);//GEN-BEGIN:|104-getter|1|104-postInit
+            groupe1.append("Femme", null);
+            groupe1.append("Homme", null);
+            groupe1.setSelectedFlags(new boolean[]{false, false});//GEN-END:|104-getter|1|104-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|104-getter|2|
+        return groupe1;
+    }
+//</editor-fold>//GEN-END:|104-getter|2|
+
+//<editor-fold defaultstate="collapsed" desc=" Generated Getter: dateField ">//GEN-BEGIN:|110-getter|0|110-preInit
+    /**
+     * Returns an initialized instance of dateField component.
+     *
+     * @return the initialized component instance
+     */
+    public DateField getDateField() {
+        if (dateField == null) {
+//GEN-END:|110-getter|0|110-preInit
+ // write pre-init user code here
+dateField = new DateField("Date de Naissance", DateField.DATE_TIME);//GEN-BEGIN:|110-getter|1|110-postInit
+            dateField.setDate(new java.util.Date(System.currentTimeMillis()));//GEN-END:|110-getter|1|110-postInit
+ // write post-init user code here
+}//GEN-BEGIN:|110-getter|2|
+        return dateField;
+    }
+//</editor-fold>//GEN-END:|110-getter|2|
 
     /**
      * Returns a display instance.
@@ -870,10 +1067,10 @@ backCommand6 = new Command("Back", Command.BACK, 0);//GEN-LINE:|95-getter|1|95-p
         } else {
             initialize();
             startMIDlet();
+           
         }
         midletPaused = false;
-        
-    }
+      }
 
     /**
      * Called when MIDlet is paused.
@@ -890,5 +1087,143 @@ backCommand6 = new Command("Back", Command.BACK, 0);//GEN-LINE:|95-getter|1|95-p
      */
     public void destroyApp(boolean unconditional) {
     }
-    
+
+    public void run() {
+        String y="";
+         if (x==1) {
+           
+            String sexe="";
+            sexe=groupe1.getString(groupe1.getSelectedIndex()+1);
+            
+        try {
+            if ((sexe.equalsIgnoreCase("Femme"))) 
+                y="1";
+               else 
+                y="0";
+            
+          
+           String sh = dateField.getDate().toString(); 
+           String datenaissance1 =replaceAll(sh," ", "");
+          String datenaissance2 = replaceAll(datenaissance1,":", "");
+           String datenaissance = replaceAll(datenaissance2,"000000UTC", "");
+            String query=url + "?nom=" + tfNom.getString()
+                    + "&prenom=" + tfPrenom.getString()
+                    + "&password=" + tfPass.getString()
+                    + "&Telephone=" + tfTel.getString() 
+                    + "&email=" + tfEmail.getString()+"&list"
+                    + "&CIN=" + tfCIN.getString()
+                   // +"&choix="+groupe.getString(groupe.getSelectedIndex())
+                    + "&listedechoix="
+                    +"&datenaissance="+datenaissance +"&sexe="+ y 
+                    +"&nbrSignalisation=";
+//                
+            System.out.println(query);
+            hc = (HttpConnection) Connector.open(query);
+            
+            dis = new DataInputStream(hc.openDataInputStream());
+            while ((ch = dis.read()) != -1) {
+                sb.append((char) ch);
+            }
+            if ("successfully added".equalsIgnoreCase(sb.toString().trim())) {
+                System.out.println(sb.toString());
+                  prenom=true;
+                tfNom.setString("");
+                tfPrenom.setString("");
+                tfPass.setString("");
+                tfEmail.setString("");
+                tfCIN.setString("");
+                tfTel.setString("");
+               
+                sb=new StringBuffer();
+            } else {
+                System.out.println("erreur");
+                prenom=false;
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }else
+        if (x==2)
+    { try {
+          StringBuffer sb1=new StringBuffer();
+             
+            hc = (HttpConnection) Connector.open(url1 + "?email=" + tfn.getString()
+                   
+                    + "&password=" + tfp.getString()
+                    );
+                  
+            dis = new DataInputStream(hc.openDataInputStream());
+            while ((ch = dis.read()) != -1) {
+                sb1.append((char) ch);
+            }
+            if (sb1.toString().equals("")==false) {
+                nom=true;
+                tfn.setString("");
+                tfp.setString("");
+                //id_client=Integer.parseInt(sb1.toString());
+                System.out.println(sb1);
+                
+               
+            } else {
+                System.out.println(sb1.toString()+"falsefalse");
+                nom=false;
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+         if(x==3){
+            try {
+                dealHandler = new DealHandler();
+                SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
+                HttpConnection hc = (HttpConnection) Connector.open("http://localhost:1234/pidv/getdeal.php");
+                DataInputStream dis = new DataInputStream(hc.openDataInputStream());
+                parser.parse(dis, dealHandler);
+                String [] ab = null;
+                for(int i=0;i<dealHandler.getDeal().length;i++){
+                ab[i] = dealHandler.getDeal()[i].getTitre();
+                System.out.println(ab[i]);
+                }
+            }
+//        try {
+//
+//            VendeurHandler handler = new VendeurHandler();
+//            
+//            SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
+//            // get an InputStream from somewhere (could be HttpConnection, for example)
+//            HttpConnection hc = (HttpConnection) Connector.open("http://localhost:1234/pidev/getXmlPersonnes.php");
+//            DataInputStream dis = new DataInputStream(hc.openDataInputStream());
+//            System.out.println(handler.posx);
+//            parser.parse(dis, handler);
+//            Vendeur a1 = handler.getVendeur()[0];
+//            this.getGoogleMapsMoveCanvas().a=a1.getPosx();
+//            this.getGoogleMapsMoveCanvas().b=a1.getPosy();
+//            aa=a1.getPosx();
+//            bb=a1.getPosy();
+//            System.out.println(googleMapsMoveCanvas.b);
+//
+//            
+//        } catch (ParserConfigurationException ex) {
+//        } catch (SAXException ex) {
+//        } catch (IOException ex) {
+//        }
+            catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (ParserConfigurationException ex) {
+                ex.printStackTrace();
+            } catch (SAXException ex) {
+                ex.printStackTrace();
+            }
+         }
+    }
+  public static String replaceAll(String text, String searchString, String replacementString) {
+     StringBuffer sBuffer = new StringBuffer();
+     int pos = 0;
+     while ((pos = text.indexOf(searchString)) != -1) {
+      sBuffer.append(text.substring(0, pos) + replacementString);
+      text = text.substring(pos + searchString.length());
+     }
+     sBuffer.append(text);
+     return sBuffer.toString();
+    }
 }
